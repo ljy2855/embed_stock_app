@@ -40,7 +40,7 @@ public class StockPriceUpdateService extends Service {
             }
         };
 
-        scheduler.scheduleAtFixedRate(priceUpdateTask, 0, 1, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(priceUpdateTask, 0, 5, TimeUnit.SECONDS);
         return START_STICKY;
     }
 

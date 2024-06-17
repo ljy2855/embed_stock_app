@@ -13,11 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
+	private static final double INITIAL_BALANCE = 10000.00;
     private ListView listView;
     private List<Stock> stocks;
     private StockAdapter adapter; // Assume StockAdapter is a custom adapter that can handle Stock objects
     private BroadcastReceiver priceUpdateReceiver;
-
+    private UserAccount userAccount;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
