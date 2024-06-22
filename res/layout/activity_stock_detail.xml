@@ -8,14 +8,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:text="Stock Name" />
 
     <TextView
         android:id="@+id/previousPriceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/stockNameTextView"
+        android:layout_centerHorizontal="true"
         android:textSize="18sp"
+        android:text="Previous Price"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -23,7 +26,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/previousPriceTextView"
+        android:layout_centerHorizontal="true"
         android:textSize="18sp"
+        android:text="Current Price"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -31,6 +36,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/currentPriceTextView"
+        android:layout_centerHorizontal="true"
         android:textSize="18sp"
+        android:text="Stock Change"
         android:layout_marginTop="20dp" />
+
+    <ListView
+        android:id="@+id/ownedStocksListView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/stockChangeTextView"
+        android:layout_centerHorizontal="true"
+        android:background="#CCC" />
+
+    <Button
+        android:id="@+id/buttonBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy"
+        android:layout_below="@id/ownedStocksListView"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/buttonSell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sell"
+        android:layout_below="@id/ownedStocksListView"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/balanceTextViewDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonBuy"
+        android:text="Current Balance: $0.00"
+        android:textSize="18sp"
+        android:background="#EEE"
+        android:gravity="center_horizontal"
+        android:textColor="#000"
+        android:paddingTop="20dp" />
+
+    <TextView
+        android:id="@+id/totalAssetsTextViewDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/balanceTextViewDetail"
+        android:text="Total Assets: $0.00"
+        android:textSize="18sp"
+        android:background="#EEE"
+        android:gravity="center_horizontal"
+        android:textColor="#000"
+        android:paddingTop="20dp" />
+
 </RelativeLayout>

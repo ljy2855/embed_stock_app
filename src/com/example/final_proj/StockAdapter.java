@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import java.util.List;
 import java.util.Random;
 import android.os.Parcel;
@@ -15,10 +16,10 @@ public class StockAdapter extends ArrayAdapter<Stock> {
     private Activity context;
     private List<Stock> stocks;
 
-    public StockAdapter(Activity context, List<Stock> stocks) {
-        super(context, R.layout.list_item_stock, stocks);
+    public StockAdapter(Activity context, List<Stock> stocks2) {
+        super(context, R.layout.list_item_stock, stocks2);
         this.context = context;
-        this.stocks = stocks;
+        this.stocks = stocks2;
     }
 
     @Override
