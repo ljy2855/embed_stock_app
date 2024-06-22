@@ -11,6 +11,6 @@ public class JniDriver {
     public native void printDOT(String text);
     public native void printFND(String text);
     public native void printLED(Integer num);
-    public native void runMotor(Integer num);
+    public native void runMotor(Integer action, Integer direction, Integer speed,Integer time);
     public native void releaseDriver();
 }

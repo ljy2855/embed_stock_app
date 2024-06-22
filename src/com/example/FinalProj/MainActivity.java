@@ -34,8 +34,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         JniDriver driver = new JniDriver();
-        driver.printLCD("test");
-        
+        driver.runMotor(1, 1, 1);
         userAccount = UserAccount.initialize(INITIAL_BALANCE);
         // Initialize the ListView and Stock list
         listView = (ListView) findViewById(R.id.stockListView);
