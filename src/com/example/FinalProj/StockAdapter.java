@@ -1,4 +1,4 @@
-package com.example.final_proj;
+package com.example.FinalProj;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,16 +7,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
+
+import com.example.FinalProj.R;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class StockAdapter extends ArrayAdapter<Stock> {
     private Activity context;
-    private List<Stock> stocks;
+    private ArrayList<Stock> stocks;
 
-    public StockAdapter(Activity context, List<Stock> stocks2) {
+    public StockAdapter(Activity context, ArrayList<Stock> stocks2) {
         super(context, R.layout.list_item_stock, stocks2);
         this.context = context;
         this.stocks = stocks2;

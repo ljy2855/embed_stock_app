@@ -1,7 +1,9 @@
-package com.example.final_proj;
+package com.example.FinalProj;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import com.example.FinalProj.R;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;

@@ -1,4 +1,4 @@
-package com.example.final_proj;
+package com.example.FinalProj;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -12,8 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+
+import com.example.FinalProj.R;
 
 public class MainActivity extends Activity {
 	private static final double INITIAL_BALANCE = 10000.00;
@@ -21,7 +22,7 @@ public class MainActivity extends Activity {
     private ListView listView;
     private TextView balanceTextView;
     private TextView totalAssetsTextView;
-    private List<Stock> stocks;
+    private ArrayList<Stock> stocks;
     private ListView ownedStocksListView;
     private StockOwnershipAdapter ownershipAdapter;
     private StockAdapter adapter; // Assume StockAdapter is a custom adapter that can handle Stock objects
@@ -32,6 +33,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        JniDriver driver = new JniDriver();
+        driver.printLCD("test");
         
         userAccount = UserAccount.initialize(INITIAL_BALANCE);
         // Initialize the ListView and Stock list
@@ -46,7 +49,7 @@ public class MainActivity extends Activity {
         stocks.add(new Stock("Microsoft", 200.00, 204.20, 0.02));
 
         // Initialize the adapter and set it to the ListView
-        adapter = new StockAdapter(this, stocks);
+        adapter = new StockAdapter(this , stocks);
         listView.setAdapter(adapter);
         
         // Set an item click listener for the ListView

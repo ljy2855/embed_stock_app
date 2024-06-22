@@ -1,4 +1,4 @@
-package com.example.final_proj;
+package com.example.FinalProj;
 
 import android.app.Service;
 import android.content.Intent;
