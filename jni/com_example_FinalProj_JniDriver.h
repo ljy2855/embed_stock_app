@@ -9,10 +9,10 @@ extern "C" {
 #endif
 /*
  * Class:     com_example_FinalProj_JniDriver
- * Method:    initializeDriver
- * Signature: ()V
+ * Method:    readKey
+ * Signature: ()I
  */
-JNIEXPORT void JNICALL Java_com_example_FinalProj_JniDriver_initializeDriver
+JNIEXPORT jint JNICALL Java_com_example_FinalProj_JniDriver_readKey
   (JNIEnv *, jobject);
 
 /*
@@ -42,26 +42,18 @@ JNIEXPORT void JNICALL Java_com_example_FinalProj_JniDriver_printFND
 /*
  * Class:     com_example_FinalProj_JniDriver
  * Method:    printLED
- * Signature: (Ljava/lang/Integer;)V
+ * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_com_example_FinalProj_JniDriver_printLED
-  (JNIEnv *, jobject, jobject);
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     com_example_FinalProj_JniDriver
  * Method:    runMotor
- * Signature: (Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;)V
+ * Signature: (IIII)V
  */
 JNIEXPORT void JNICALL Java_com_example_FinalProj_JniDriver_runMotor
-  (JNIEnv *, jobject, jobject, jobject, jobject, jobject);
-
-/*
- * Class:     com_example_FinalProj_JniDriver
- * Method:    releaseDriver
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_example_FinalProj_JniDriver_releaseDriver
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jint, jint, jint, jint);
 
 #ifdef __cplusplus
 }

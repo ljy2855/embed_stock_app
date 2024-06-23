@@ -37,10 +37,12 @@ public class StockPriceUpdateService extends Service {
                     broadcastIntent.putExtra("NEW_PRICE", stock.getCurrentPrice());
                     sendBroadcast(broadcastIntent);
                 }
+                JniDriver driver = new JniDriver();
+                driver.printPriceChangeEvent();
             }
         };
 
-        scheduler.scheduleAtFixedRate(priceUpdateTask, 0, 5, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(priceUpdateTask, 0, 3, TimeUnit.SECONDS);
         return START_STICKY;
     }
 

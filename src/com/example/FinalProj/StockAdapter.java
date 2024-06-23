@@ -42,7 +42,6 @@ public class StockAdapter extends ArrayAdapter<Stock> {
     }
 }
 
-
 class Stock implements Parcelable {
     private String name;
     private double previousPrice;

@@ -17,8 +17,8 @@ import java.util.Map;
 import com.example.FinalProj.R;
 
 public class MainActivity extends Activity {
-	private static final double INITIAL_BALANCE = 10000.00;
-	private static final int REQUEST_CODE = 1;
+    private static final double INITIAL_BALANCE = 10000.00;
+    private static final int REQUEST_CODE = 1;
     private ListView listView;
     private TextView balanceTextView;
     private TextView totalAssetsTextView;
@@ -28,13 +28,15 @@ public class MainActivity extends Activity {
     private StockAdapter adapter; // Assume StockAdapter is a custom adapter that can handle Stock objects
     private BroadcastReceiver priceUpdateReceiver;
     private UserAccount userAccount;
-    
+    JniDriver driver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        JniDriver driver = new JniDriver();
-        driver.runMotor(1, 1, 1);
+        driver = new JniDriver();
+        driver.clearDevice();
+
         userAccount = UserAccount.initialize(INITIAL_BALANCE);
         // Initialize the ListView and Stock list
         listView = (ListView) findViewById(R.id.stockListView);
@@ -48,19 +50,20 @@ public class MainActivity extends Activity {
         stocks.add(new Stock("Microsoft", 200.00, 204.20, 0.02));
 
         // Initialize the adapter and set it to the ListView
-        adapter = new StockAdapter(this , stocks);
+        adapter = new StockAdapter(this, stocks);
         listView.setAdapter(adapter);
-        
+
         // Set an item click listener for the ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-	            Stock selectedStock = stocks.get(position);
-	            Intent intent = new Intent(MainActivity.this, StockDetailActivity.class);
-	            intent.putExtra("STOCK", selectedStock);
-	            startActivity(intent);
+                Stock selectedStock = stocks.get(position);
+                Intent intent = new Intent(MainActivity.this, StockDetailActivity.class);
+                intent.putExtra("STOCK", selectedStock);
+                startActivity(intent);
             }
         });
-        ArrayList<Map.Entry<String, Integer>> ownedStocksList = new ArrayList<Map.Entry<String, Integer>>(userAccount.getOwnedStocks().entrySet());
+        ArrayList<Map.Entry<String, Integer>> ownedStocksList = new ArrayList<Map.Entry<String, Integer>>(
+                userAccount.getOwnedStocks().entrySet());
         ownershipAdapter = new StockOwnershipAdapter(this, ownedStocksList);
         ownedStocksListView.setAdapter(ownershipAdapter);
 
@@ -77,8 +80,8 @@ public class MainActivity extends Activity {
                             break;
                         }
                     }
-                adapter.notifyDataSetChanged(); // Notify the adapter to refresh the list view
-                updateUI();
+                    adapter.notifyDataSetChanged(); // Notify the adapter to refresh the list view
+                    updateUI();
                 }
             }
         };
@@ -104,16 +107,19 @@ public class MainActivity extends Activity {
         // Unregister receiver to avoid memory leaks
         unregisterReceiver(priceUpdateReceiver);
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
         updateOwnedStocksList(); // 보유 주식 리스트 업데이트 및 어댑터 갱신
-        updateUI();  // UI 업데이트
+        driver.clearDevice();
+        updateUI(); // UI 업데이트
+
     }
 
     private void updateOwnedStocksList() {
-        ArrayList<Map.Entry<String, Integer>> ownedStocksList = new ArrayList<Map.Entry<String, Integer>>(userAccount.getOwnedStocks().entrySet());
+        ArrayList<Map.Entry<String, Integer>> ownedStocksList = new ArrayList<Map.Entry<String, Integer>>(
+                userAccount.getOwnedStocks().entrySet());
         if (ownershipAdapter == null) {
             ownershipAdapter = new StockOwnershipAdapter(this, ownedStocksList);
             ownedStocksListView.setAdapter(ownershipAdapter);
@@ -123,6 +129,7 @@ public class MainActivity extends Activity {
             ownershipAdapter.notifyDataSetChanged();
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -131,10 +138,11 @@ public class MainActivity extends Activity {
             updateUI();
         }
     }
+
     private void updateUI() {
-    	double balance = userAccount.getBalance(); // Direct access
+        double balance = userAccount.getBalance(); // Direct access
         double totalAssets = balance;
-        
+
         for (Map.Entry<String, Integer> entry : userAccount.getOwnedStocks().entrySet()) {
             for (Stock stock : stocks) {
                 if (stock.getName().equals(entry.getKey())) {
@@ -145,5 +153,6 @@ public class MainActivity extends Activity {
 
         balanceTextView.setText(String.format("Balance: $%.2f", balance));
         totalAssetsTextView.setText(String.format("Total Assets: $%.2f", totalAssets));
+        driver.printAccount(totalAssets, balance);
     }
 }
